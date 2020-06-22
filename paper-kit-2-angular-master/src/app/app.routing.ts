@@ -6,17 +6,17 @@ import { Routes, RouterModule } from '@angular/router';
 import { ComponentsComponent } from './components/components.component';
 import { ProfileComponent } from './examples/profile/profile.component';
 import { SignupComponent } from './examples/signup/signup.component';
-import { LandingComponent } from './examples/landing/landing.component';
 import { NucleoiconsComponent } from './components/nucleoicons/nucleoicons.component';
-import { ProductsComponent } from './views/products/products.component'
+import { ProductComponent } from './components/product/product.component';
+import { ContactComponent } from './components/contact/contact.component';
 const routes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
     { path: 'home',             component: ComponentsComponent },
     { path: 'user-profile',     component: ProfileComponent },
     { path: 'signup',           component: SignupComponent },
-    { path: 'landing',          component: LandingComponent },
     { path: 'nucleoicons',      component: NucleoiconsComponent },
-    { path: 'products', component: ProductsComponent },
+    { path: 'product',          component: ProductComponent  },
+    { path: 'contact',          component: ContactComponent},
 ];
 
 @NgModule({

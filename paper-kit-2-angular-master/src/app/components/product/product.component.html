@@ -1,0 +1,87 @@
+<div class="wrapper">
+    <div class="page-header section-dark" style="background-image: url('assets/img/antoine-barres.jpg')">
+        <div class="filter"></div>
+        <div class="content-center">
+            <div class="container">
+                <div class="title-brand">
+                    <div class="angular-logo">
+                    </div>
+                    <h1 class="presentation-title">C-Pharmacy</h1>
+                    <div class="fog-low">
+                        <img src="assets/img/fog-low.png" alt="">
+                    </div>
+                    <div class="fog-low right">
+                        <img src="assets/img/fog-low.png" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="moving-clouds" style="background-image: url('assets/img/clouds.png'); "></div>
+    </div>
+        <section class="mt-3 mb-3">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-3">
+                        <div class="left-sidebar">
+                            <h2>Category</h2>
+                            <div class="panel-group category-products" id="accordian">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">
+                                            <a data-toggle="collapse" data-parent="#accordian" (click)="isCollapsed = !isCollapsed">
+                                                <span class="badge pull-right"><i class="fa fa-plus"></i></span>
+                                                Thuốc
+                                            </a>
+                                        </h4>
+                                    </div>
+                                    <div [ngbCollapse]="isCollapsed" class="panel-collapse collapse">
+                                        <div class="panel-body p-2">
+                                            <ul style="list-style: none;">
+                                                <li><a href="">a</a></li>
+                                                <li><a href="">b</a></li>
+                                                <li><a href="">c</a></li>
+                                                <li><a href="">d</a></li>
+                                                <li><a href="">e</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title"><a >Thuốc</a></h4>
+                                    </div>
+                                </div>
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title"><a >Thuốc</a></h4>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                            <div class="brands_products">
+                                <h2>Brands</h2>
+                                <div class="brands-name">
+                                    <ul class="nav nav-pills nav-stacked">
+                                        <li><a href=""> <span class="pull-right">(50)</span>Thuốc nhỏ mắt</a></li>
+                                        <li><a href=""> <span class="pull-right">(56)</span>Thuốc giảm đau</a></li>
+                                        <li><a href=""> <span class="pull-right">(27)</span>Thuốc gì đó</a></li>
+                                        <li><a href=""> <span class="pull-right">(32)</span>Thuốc tùm lum</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <div class="price-range">
+                                <h2>Price Range</h2>
+                            </div>                                                     
+                        </div>
+                    </div>
+                    
+                    <div class="col-sm-9">
+                        <div class="features_items">
+                            <h2>Features Items</h2>
+                            <app-card-product></app-card-product>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>

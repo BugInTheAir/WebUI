@@ -1,0 +1,9 @@
+.product-name {
+    white-space: nowrap;
+    width: auto;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.product-name h4{
+    font-weight: bold;
+}
