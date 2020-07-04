@@ -159,4 +159,7 @@ ul li {
   border-radius: 4px;
   display: block;
 }
+mat-slider {
+  width: 400px;
+}
   

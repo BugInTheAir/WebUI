@@ -1,0 +1,51 @@
+<div class="page-header page-header-xs" data-parallax="true" style="background-image: url('./assets/img/fabio-mangione.jpg');">
+    <div class="filter"></div>
+</div>
+<div class="container">
+<div class="col-sm-12 col-md-12 col-lg-12">
+    <div class="product-content product-wrap clearfix product-deatil">
+        <div class="row">
+            <div class="col-md-5 col-sm-12 col-xs-12">
+                <div class="product-image carousel m-3">
+                    <ngb-carousel>
+                        <ng-template ngbSlide *ngFor="let img of product.Imgs">
+                            <img src="data:image/jpg;base64,{{img.ImgName}}" alt="Image Product">
+                            <div class="carousel-caption">
+                            </div>
+                        </ng-template>
+                    </ngb-carousel>
+                </div>
+            </div>
+            <div class="col-md-7 col-sm-12 col-xs-12">
+                <h2 class="name">
+                    {{product.ProductName}}
+                </h2>
+                <hr />
+                <h3 class="price-container">
+                    {{product.Price}}
+                </h3>
+                <div class="row align-items-center">
+                    <div class="col-sm-12 col-md-6 col-lg-6">
+                        <button mat-stroked-button color="primary" (click)="Add(product)" (click)="openSnackBar(quants, product.ProductName)">Add to cart ({{product.Price}})</button>
+                    </div>
+                    <div>
+                        <mat-form-field>
+                            <mat-label>Choose Quantity</mat-label>
+                            <input matInput type="number" min="1" max="20" [(ngModel)]="quants">                           
+                        </mat-form-field>
+                    </div>
+                </div>
+                <hr />
+                <mat-tab-group>
+                    <mat-tab label="Description">
+                        <div class="p-2" [innerHTML]="product.Des">
+                                
+                        </div>
+                    </mat-tab>
+                    <mat-tab label="Comment">Comment</mat-tab>
+                  </mat-tab-group>
+                <hr />       
+            </div>
+        </div>
+    </div>
+</div>

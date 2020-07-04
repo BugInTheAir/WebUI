@@ -1,0 +1,8 @@
+{
+    "/warehouse/api/*":{
+        "target":"http://cpharma.southeastasia.cloudapp.azure.com",
+        "secure":false,
+        "logLevel":"debug",
+        "changeOrigin":true
+    }
+}

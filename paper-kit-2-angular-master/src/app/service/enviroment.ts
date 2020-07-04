@@ -1,0 +1,1 @@
+export const env="http://cpharma.southeastasia.cloudapp.azure.com/crm/api/";

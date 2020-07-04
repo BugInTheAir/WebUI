@@ -1,8 +1,8 @@
-<div class="row justify-content-center">
-    <div class="col-lg-3 col-md-4 col-sm-4 col-xs-6"*ngFor="let item of product">
+<div class="row">
+    <div class="col-lg-3 col-md-4 col-sm-4 col-xs-6"*ngFor="let item of products">
         <div class="card">
             <a class="text-center">
-                <img class="" style="width:100%; max-width: 200px; max-height: 200px;" src="{{item.Imgs[0].ImgName}}" />
+                <img class="" style="width:100%; max-width: 200px; max-height: 200px;" src="data:image/jpg;base64,{{item.Imgs[0].ImgName}}" />
             </a>
             <div class="card-body text-black">
                 <div class="product-name text-center">
@@ -12,7 +12,7 @@
                     <h5>{{item.Price}} VND</h5>
                 </div>
                 <div class="row justify-content-center text-center">
-                    <button class="btn btn-outline-primary col-lg-4 col-md-4 col-sm-4 col-xs-4" (click)="RedirectToProductDetail(item.ProductCode)">View</button>
+                    <button [routerLink]="['/productdetail', item.ProductCode]" mat-button color="primary" >View</button>
                     <button class="btn btn-danger col-lg-4 col-md-4 col-sm-4 col-xs-4">add</button>
                 </div>
             </div>

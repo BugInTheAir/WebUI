@@ -1,5 +1,5 @@
 <div class="wrapper">
-    <div class="page-header section-dark" style="background-image: url('assets/img/antoine-barres.jpg')">
+    <div class="page-header page-header-xs section-dark" style="background-image: url('assets/img/antoine-barres.jpg')">
         <div class="filter"></div>
         <div class="content-center">
             <div class="container">
@@ -24,40 +24,18 @@
                     <div class="col-sm-3">
                         <div class="left-sidebar">
                             <h2>Category</h2>
-                            <div class="panel-group category-products" id="accordian">
+                            <div class="panel-group category-products" id="accordian" *ngFor="let item of categorys">
                                 <div class="panel panel-default">
                                     <div class="panel-heading">
                                         <h4 class="panel-title">
-                                            <a data-toggle="collapse" data-parent="#accordian" (click)="isCollapsed = !isCollapsed">
-                                                <span class="badge pull-right"><i class="fa fa-plus"></i></span>
-                                                Thuốc
+                                            <a data-toggle="collapse" data-parent="#accordian">
+                                                {{item.TypeName}}
                                             </a>
                                         </h4>
                                     </div>
-                                    <div [ngbCollapse]="isCollapsed" class="panel-collapse collapse">
-                                        <div class="panel-body p-2">
-                                            <ul style="list-style: none;">
-                                                <li><a href="">a</a></li>
-                                                <li><a href="">b</a></li>
-                                                <li><a href="">c</a></li>
-                                                <li><a href="">d</a></li>
-                                                <li><a href="">e</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="panel panel-default">
-                                    <div class="panel-heading">
-                                        <h4 class="panel-title"><a >Thuốc</a></h4>
-                                    </div>
-                                </div>
-                                <div class="panel panel-default">
-                                    <div class="panel-heading">
-                                        <h4 class="panel-title"><a >Thuốc</a></h4>
-                                    </div>
                                 </div>
                             </div>
-                        
+<!--                         
                             <div class="brands_products">
                                 <h2>Brands</h2>
                                 <div class="brands-name">
@@ -68,10 +46,19 @@
                                         <li><a href=""> <span class="pull-right">(32)</span>Thuốc tùm lum</a></li>
                                     </ul>
                                 </div>
-                            </div>
+                            </div> -->
                             
                             <div class="price-range">
                                 <h2>Price Range</h2>
+                                <div class="row justify-content-center">
+                                <mat-slider
+                                    thumbLabel
+                                    [displayWith]="formatLabel"
+                                    tickInterval="5"
+                                    min="1"
+                                    max="3000">
+                                </mat-slider> 
+                            </div>              
                             </div>                                                     
                         </div>
                     </div>

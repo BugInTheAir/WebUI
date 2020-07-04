@@ -1,0 +1,56 @@
+<div class="row mt-1">
+    <div class="col-lg-9">
+        <div class="row justify-content-center align-items-center cart-form p-3 ml-auto mr-auto mb-auto mt-1" *ngFor="let item of cart.item">
+            <div class="col-lg-3 text-center">
+                <img style="max-width: 75px; max-height: 75px;" src="data:image/jpg;base64,{{item.Image}}">
+            </div>
+            <div class="col-lg-2 text-center"><h4 class="pt-3">{{item.ProductName}}</h4></div>
+            <div class="col-lg-1 text-center"><h4 class="pt-3">{{item.Price}}</h4></div>
+            <div class="col-lg-3">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <button (click)="subtract(item.ProductCode)" class="btn btn-outline-primary">&minus;</button>
+                    </div>
+                    <input class="text-center form-control" type="tel" placeholder="{{item.Quants}}" style="margin-left: -5px;"/>
+                    <div class="input-group-append" style="max-width: 35.2px;">
+                        <button (click)="plus(item.ProductCode)" class="btn btn-outline-primary">&#43;</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-1 text-center"><h4 class="pt-3">Total</h4></div>
+            <div class="col-lg-1 justify-content-center" style="display: flex;"><button (click)="deleteone(item.ProductCode)" mat-button><i class="fa fa-trash" aria-hidden="true" style="color: red;"></i></button></div>
+        </div>
+        <div class="row coupon ml-auto mr-auto mb-auto mt-1">
+            <input type="text"
+                   class="form-control col-lg-4"
+                   placeholder="Coupon" />
+            <button class="btn btn-outline-primary col-lg-2">Apply</button>
+        </div>
+    </div>
+    <div class="col-lg-3">
+        <div class="row justify-content-center bill-form mt-1 m-auto">
+            <div class="p-4 col-lg-10">
+                <div class="text-center">
+                <strong class="p-1 text-center">BILL</strong>
+                </div>
+                <br />
+                <div class="align-items-center" style="display:flex">
+                    <table class="table-bill table table-sm">
+                        <tr>
+                            <th>Total number</th>
+                            <td>{{itemCount}}</td>
+                        </tr>
+                        <tr>
+                            <th>Discount</th>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <th>Total</th>
+                            <td>{{total}}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

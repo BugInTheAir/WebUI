@@ -1,0 +1,96 @@
+<div class="wrapper">
+    <div class="page-header" style="background-image: url('./assets/img/login-image.jpg');">
+        <div class="filter"></div>
+            <div class="container" style="z-index: 2;">
+                <!-- <div class="row">
+                    <div class="col-lg-4 col-sm-6 mr-auto ml-auto">
+                      <div class="card card-register">
+                          <strong>Register</strong>
+                            <label>UserName</label>
+                            <div class="input-group form-group-no-border">
+                                <input type="text" class="form-control" placeholder="UserName" [(ngModel)]="user.UserName">
+                            </div>
+                            <label>Password</label>
+                            <div class="input-group form-group-no-border" >
+                                <input type="password" class="form-control" placeholder="Password" [(ngModel)]="user.Password" >
+                            </div>
+                            <label>Confirm Password</label>
+                            <div class="input-group form-group-no-border">
+                                <input type="password" class="form-control" placeholder="Confirm Password" >
+                            </div>
+                            <label>Phone</label>
+                            <div class="input-group form-group-no-border">
+                                <input type="tel" class="form-control" placeholder="Phone" [(ngModel)]="user.PhoneNumber">
+                            </div>
+                            <label>Address</label>
+                            <div class="input-group form-group-no-border">
+                                <input type="text" class="form-control" placeholder="Address" [(ngModel)]="user.Address">
+                            </div>
+                            <label>Name</label>
+                            <div class="input-group form-group-no-border" >
+                                <input type="text" class="form-control" placeholder="Name" [(ngModel)]="user.FullName">
+                            </div>
+                            <button class="btn btn-danger btn-block btn-round" (click)="Regis()">Register</button>
+                            <div class="alert alert-sucess">{{status}}</div>
+                      </div>
+                    </div>
+                </div> -->\
+                <div class="justify-content-center" style="display: flex;">
+                <mat-horizontal-stepper linear #stepper class="card card-register">
+                    <mat-step [stepControl]="firstFormGroup" errorMessage="Fill you account">
+                      <form [formGroup]="firstFormGroup">
+                        <ng-template matStepLabel>Account</ng-template>
+                        <div card card-register>
+                        <label>UserName</label>
+                        <div class="input-group form-group-no-border">
+                            <input type="text" class="form-control" placeholder="UserName" [(ngModel)]="user.UserName" formControlName="firstCtrl" required>
+                        </div>
+                        <label>Password</label>
+                        <div class="input-group form-group-no-border" >
+                            <input type="password" class="form-control" placeholder="Password" [(ngModel)]="user.Password" formControlName="firstCtrl" required minlength="8">
+                        </div>
+                        <label>Confirm Password</label>
+                        <div class="input-group form-group-no-border">
+                            <input type="password" class="form-control" placeholder="Confirm Password" formControlName="firstCtrl" required required minlength="8">
+                        </div>
+                        <div class="justify-content-center mt-2" style="display: flex;">
+                          <button mat-button color="warn" matStepperNext>Next</button>
+                        </div>
+                      </div>
+                      </form>
+                    </mat-step>
+                    <mat-step [stepControl]="secondFormGroup" errorMessage="Fill your Infor">
+                      <form [formGroup]="secondFormGroup">
+                        <ng-template matStepLabel>Fill your infor</ng-template>
+                          <label>Name</label>
+                          <div class="input-group form-group-no-border" >
+                              <input type="text" class="form-control" placeholder="Name" [(ngModel)]="user.FullName" formControlName="secondCtrl">
+                          </div>
+                          <label>Phone</label>
+                            <div class="input-group form-group-no-border">
+                                <input type="tel" class="form-control" placeholder="Phone" [(ngModel)]="user.PhoneNumber" formControlName="secondCtrl">
+                            </div>
+                            <label>Address</label>
+                            <div class="input-group form-group-no-border">
+                                <input type="text" class="form-control" placeholder="Address" [(ngModel)]="user.Address" formControlName="secondCtrl">
+                            </div>
+                        <div class="justify-content-center mt-2" style="display: flex;">
+                          <button mat-button matStepperPrevious>Back</button>
+                          <button mat-button matStepperNext>Next</button>
+                        </div>
+                      </form>
+                    </mat-step>
+                    <mat-step>
+                      <ng-template matStepLabel>Done</ng-template>
+                      <p>You are now done.</p>
+                      <p>{{status}}</p>
+                      <div class="justify-content-center mt-2" style="display: flex;">
+                        <button mat-button matStepperPrevious>Back</button>
+                        <button mat-button (click)="Regis()">Register</button>
+                      </div>
+                    </mat-step>
+                  </mat-horizontal-stepper>
+                </div>
+            </div>
+    </div>
+</div>
