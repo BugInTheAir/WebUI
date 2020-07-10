@@ -4,6 +4,7 @@ import { CartServiceService } from 'app/service/cart-service.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { IPayPalConfig, ICreateOrderRequest } from 'ngx-paypal';
 import { ProductItem, Amount, BreakDown, PurchaseUnits } from 'app/models/purchase-units';
+import { Orders, OrderDetail } from 'app/models/orders';
 
 @Component({
   selector: 'app-cart',
@@ -15,6 +16,7 @@ export class CartComponent implements OnInit {
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
   cart = new Cart();
+  orders = new Orders();
   public payPalConfig ?: IPayPalConfig;
   constructor(public cartSvc: CartServiceService, private _formBuilder: FormBuilder) { }
   ngOnInit(): void {
@@ -49,11 +51,11 @@ getAmount(cart: Cart) {
         sum += item.Price * item.Quants;
     })
     result.currency_code = 'USD';
-    result.value = '2';
+    result.value = '1';
     let breakdown = new BreakDown();
     let item_total = new Amount();
     item_total.currency_code = 'USD';
-    item_total.value = '2';
+    item_total.value = '1';
     breakdown.item_total = item_total;
     result.breakdown = breakdown;
     return result;
@@ -71,34 +73,25 @@ getListPurchase(cart: Cart) {
     purchase_units .push(this.getPurchase(cart));
     return purchase_units ;
 }
+getOrder(cart: Cart){
+    let order = new Array<OrderDetail>();
+    cart.item.forEach((item) => {
+        let temp = new OrderDetail();
+        temp.ProductCode= item.ProductCode;
+        temp.Price = item.Price;
+        temp.Quants = item.Quants;
+        order.push(temp);
+    })
+    console.log('itemOrder', order );
+    return order;
+}
 private initConfig(): void {
     this.payPalConfig = {
         currency: 'USD',
         clientId: 'ARKvnV2rl0vvOPH8d-cb7qTXuUOnumiNCRUnjl2L5XjNYF_0iSc1fyElaG3AsvgXbcjRQQZAbUkx2WM0',
         createOrderOnClient: (data) => <ICreateOrderRequest> {
             intent: 'CAPTURE',
-            purchase_units: this.getListPurchase(this.cart),
-            // purchase_units: [{
-            //     amount: {
-            //         currency_code: 'USD',
-            //         value: '5',
-            //         breakdown: {
-            //             item_total: {
-            //                 currency_code: 'USD',
-            //                 value: '5'
-            //             }
-            //         }
-            //     },
-            //     items: [{
-            //         name: 'Enterprise Subscription',
-            //         quantity: '5',
-            //         category: 'DIGITAL_GOODS',
-            //         unit_amount: {
-            //             currency_code: 'USD',
-            //             value: '1',
-            //         },
-            //     }]
-            // }]             
+            purchase_units: this.getListPurchase(this.cart),           
         },
         advanced: {
             commit: 'true'
@@ -112,6 +105,9 @@ private initConfig(): void {
             actions.order.get().then(details => {
                 console.log('onApprove - you can get full order details inside onApprove: ', details);
                 console.log('PayerID', details.payer.payer_id);
+                this.orders.paypalId = details.payer.payer_id;
+                this.orders.item = this.getOrder(this.cart)
+                console.log(this.orders);
             });
 
         },

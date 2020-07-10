@@ -11,7 +11,6 @@ import { PivotMV } from 'app/models/pivot-mv';
 })
 export class CardProductComponent implements OnInit {
   products = new Array<Product>();
-  productDe = new Product();
   From = 0;
   Quants = 20;
   Id = null;
