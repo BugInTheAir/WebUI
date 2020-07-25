@@ -26,13 +26,24 @@ import {MatBadgeModule} from '@angular/material/badge';
 import {MatIconModule} from '@angular/material/icon';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatStepperModule} from '@angular/material/stepper';
-import { from } from 'rxjs';
 import { CardNewProductComponent } from './card-new-product/card-new-product.component';
 import { CartComponent } from './cart/cart.component';
 import { CartItemComponent } from './cart-item/cart-item.component';
 import { SigninComponent } from './signin/signin.component';
 import { SignupComponent } from './signup/signup.component';
 import { NgxPayPalModule } from 'ngx-paypal';
+import {GalleriaModule} from 'primeng/galleria';
+import {DataViewModule} from 'primeng/dataview';
+import { UserprofileComponent } from './userprofile/userprofile.component';
+import {FieldsetModule} from 'primeng/fieldset';
+import {InplaceModule} from 'primeng/inplace';
+import {TabViewModule} from 'primeng/tabview';
+import { FacebookModule } from 'ngx-facebook';
+import {CarouselModule} from 'primeng/carousel';
+import {TableModule} from 'primeng/table';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { CardProductRelateComponent } from './card-product-relate/card-product-relate.component';
+import {MatMenuModule} from '@angular/material/menu';
 // import { CheckoutComponent } from './checkout/checkout.component';
 @NgModule({
     imports: [
@@ -51,7 +62,18 @@ import { NgxPayPalModule } from 'ngx-paypal';
         MatSnackBarModule,
         MatStepperModule,
         ReactiveFormsModule,
-        NgxPayPalModule
+        NgxPayPalModule,
+        GalleriaModule,
+        DataViewModule,
+        FieldsetModule,
+        InplaceModule,
+        TabViewModule,
+        FacebookModule,
+        FacebookModule.forRoot(),
+        CarouselModule,
+        TableModule,
+        NgxSpinnerModule,
+        MatMenuModule,
     ],
     declarations: [
         ComponentsComponent,
@@ -70,6 +92,8 @@ import { NgxPayPalModule } from 'ngx-paypal';
         CartItemComponent,
         SigninComponent,
         SignupComponent,
+        UserprofileComponent,
+        CardProductRelateComponent,
         // CheckoutComponent,
     ],
     entryComponents: [NgbdModalContent],

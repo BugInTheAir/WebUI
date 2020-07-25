@@ -1,6 +1,5 @@
 <div class="wrapper">
-    <div class="page-header page-header-xs section-dark" style="background-image: url('assets/img/antoine-barres.jpg')">
-        <div class="filter"></div>
+    <div class="page-header page-header-xs section-dark" style="background-image: url('assets/img/b1.jpg')">
         <div class="content-center">
             <div class="container">
                 <div class="title-brand">
@@ -22,18 +21,25 @@
       <div class="section">
           <div class="container">
             <div class="title-section text-center col-12">
-                <h2 class="text-uppercase">New Product</h2>
+                <h2 class="text-uppercase">Sản phẩm mới</h2>
                 <hr>
             </div>
             <app-card-new-product></app-card-new-product>
+            <div class="mt-1 d-flex justify-content-center" style="height: 30px;">
+                <ngx-spinner bdColor="transparent" size="default" color = "#000" type="square-jelly-box" [fullScreen]="false"></ngx-spinner>
+            </div>
           </div>
       </div>
       <div class="section">
         <div class="container">
-          <div class="title-section text-center col-12">
-              <h2 class="text-uppercase">Popular Product</h2>
-              <hr>
-          </div>
+            <div class="title-section text-center col-12">
+                <h2 class="text-uppercase">Sản phẩm phổ biến</h2>
+                <hr>
+            </div>
+            <app-card-product></app-card-product>
+            <div class="mt-2 d-flex justify-content-center" style="height: 50px;">
+                <ngx-spinner bdColor="transparent" size="default" color = "#000" type="square-jelly-box" [fullScreen]="false"></ngx-spinner>
+            </div>
         </div>
     </div>
     <div class="section">

@@ -4,7 +4,7 @@
             <div class="container" style="z-index: 2;">
                 <div class="justify-content-center" style="display: flex;">
                 <mat-horizontal-stepper linear #stepper class="card card-register">
-                    <mat-step [stepControl]="firstFormGroup" errorMessage="Fill you account">
+                    <mat-step [stepControl]="firstFormGroup" errorMessage="Fill your account">
                       <form [formGroup]="firstFormGroup">
                         <ng-template matStepLabel>Account</ng-template>
                         <div card card-register>
@@ -18,7 +18,7 @@
                         </div>
                         <label>Confirm Password</label>
                         <div class="input-group form-group-no-border">
-                            <input type="password" class="form-control" placeholder="Confirm Password" formControlName="firstCtrl" required required minlength="8">
+                            <input type="password" class="form-control" placeholder="Confirm Password" formControlName="firstCtrl" required minlength="8">
                         </div>
                         <div class="justify-content-center mt-2" style="display: flex;">
                           <button mat-button color="warn" matStepperNext>Next</button>

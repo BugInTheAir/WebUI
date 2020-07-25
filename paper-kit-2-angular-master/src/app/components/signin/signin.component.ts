@@ -23,7 +23,7 @@ export class SigninComponent implements OnInit {
       this.router.navigate(['/home']);
     }
     else {
-      this.caption = "Failed!";
+      this.caption = 'Failed!';
     }
   }
 }

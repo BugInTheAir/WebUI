@@ -39,7 +39,7 @@
         max-height: 700px;
     }
     &.page-header-xs{
-        min-height: 40vh !important;
+        min-height: 47vh !important;
     }
 
     &.section-dark{
@@ -193,7 +193,7 @@
     background: linear-gradient(to bottom, #FFFFFF 35%,#4e6773 100%);
 
     -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    -webkit-text-fill-color: #00000070;
 }
 .presentation-subtitle{
     font-size: 1.7em;

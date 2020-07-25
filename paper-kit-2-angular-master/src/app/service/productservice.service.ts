@@ -14,40 +14,77 @@ export class ProductserviceService {
   product: Product;
   product$;
   category$;
+  // lazyloadProduct(pivot, callback){
+  //   this.product$ = this.http.post('http://52.163.93.79/ware_svc/api/medical/product', pivot);
+  //   this.product$.subscribe((response) => {
+  //     callback.initProduct(response);
+  //     callback.totalRecord;
+  //   })
+  // }
   getProduct(pivot , callback) {
-    this.product$ = this.http.post('http://cpharma.southeastasia.cloudapp.azure.com/warehouse/api/medical/product', pivot);
-    this.product$.subscribe((response) => {
-      response.forEach((item) => {
+      this.http.post('http://52.163.93.79/ware_svc/api/medical/product', pivot).subscribe((response) => {
+      const temp = response as Array<Product>;
+      temp.forEach((item) => {
         callback.From += 1;
-        this.products.push(item);
+      let flag = false;
+      callback.products.forEach((itemPr) => {
+        if (itemPr.ProductCode === item.ProductCode) {
+          flag = true;
+        }
       });
-      callback.products = this.products;
-    })
+      if (!flag) {
+        callback.products.push(item);
+      }
+      callback.hideSpinner();
+      callback.loading = false;
+      callback.loadingMore = false;
+      });
+    });
   }
   getProductbyType(pivot, callback) {
-    this.product$ = this.http.post('http://cpharma.southeastasia.cloudapp.azure.com/warehouse/api/medical/product',pivot);
-    this.product$.subscribe((response) => {
-      response.forEach((item) => {
-        callback.From += 1;
-        this.newProducts.push(item);
+    if (callback.previousType !== pivot.Id) {
+      callback.previousType = pivot.Id;
+      callback.products = new Array<Product>();
+      callback.From = 0;
+    }
+     this.http.post('http://52.163.93.79/ware_svc/api/medical/product', pivot).subscribe((response) => {
+     const temp = response as Array<Product>;
+     temp.forEach((item) => {
+      callback.From += 1;
+      let flag = false;
+      callback.products.forEach((itemPr) => {
+        if (itemPr.ProductCode === item.ProductCode) {
+          flag = true;
+        }
       });
-      callback.newProducts = this.newProducts;
-    })
+      if (!flag) {
+        callback.products.push(item);
+      }
+      callback.hideSpinner();
+      callback.loading = false;
+      callback.loadingMore = false;
+      });
+    });
   }
-  getCategory(callback){
-    this.category$ = this.http.get('http://cpharma.southeastasia.cloudapp.azure.com/warehouse/api/medical/types');
-    this.category$.subscribe((response) => {
-      response.forEach((item) => {
-        this.categorys.push(item);
+  getCategory(callback) {
+    this.category$ = this.http.get('http://52.163.93.79/ware_svc/api/medical/types').subscribe((response) => {
+      const temp = response as Array<ProductType>;
+      temp.forEach((item) => {
+        let flag = false;
+        callback.categorys.forEach((itemCategory) => {
+          if (itemCategory.TypeId === item.TypeId) {
+            flag = true;
+          }
+        });
+        if (!flag) {
+          callback.categorys.push(item);
+        }
       });
-      callback.categorys = this.categorys;
     })
   }
   getProductbyId(id, callback) {
-    this.product$ = this.http.get<Product>('http://cpharma.southeastasia.cloudapp.azure.com/warehouse/api/medical/product/' + id);
-    this.product$.subscribe((response) => {
-      this.product = response;
-      callback.product = this.product;
+    this.product$ = this.http.get<Product>('http://52.163.93.79/ware_svc/api/medical/product/' + id).subscribe((response) => {
+      callback.product = response;
     });
   }
 }

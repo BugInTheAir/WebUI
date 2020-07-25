@@ -1,8 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { Product, ImgMV } from 'app/models/product';
 import { Router } from '@angular/router';
 import { ProductserviceService } from 'app/service/productservice.service';
 import { PivotMV } from 'app/models/pivot-mv';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { CartServiceService } from 'app/service/cart-service.service';
+import { DelegateServiceService } from 'app/service/delegate-service.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-card-product',
@@ -11,18 +15,42 @@ import { PivotMV } from 'app/models/pivot-mv';
 })
 export class CardProductComponent implements OnInit {
   products = new Array<Product>();
+  pivot = new PivotMV();
   From = 0;
-  Quants = 20;
+  Quants = 8;
   Id = null;
-  constructor(public router: Router, public prSvc: ProductserviceService) { }
-  ngOnInit(): void {
-    this.prSvc.getProduct(this.getPivot(), this);
+  previousType = null;
+  responsiveOptions;
+  constructor(public router: Router, public prSvc: ProductserviceService, private spinner: NgxSpinnerService) {
+    this.responsiveOptions = [
+      {
+          breakpoint: '1024px',
+          numVisible: 3,
+          numScroll: 3
+      },
+      {
+          breakpoint: '768px',
+          numVisible: 2,
+          numScroll: 2
+      },
+      {
+          breakpoint: '560px',
+          numVisible: 1,
+          numScroll: 1
+      }
+  ];
+  }
+  ngOnInit() {
+    this.prSvc.getProductbyType(this.getPivot(), this);
   }
   getPivot() {
-    let pivot = new PivotMV();
-    pivot.From = this.From;
-    pivot.Quants = this.Quants;
-    pivot.Id = this.Id;
-    return pivot;
+    this.pivot.From = this.From;
+    this.pivot.Quants = this.Quants;
+    this.pivot.Id = this.Id;
+    this.previousType = this.pivot.Id;
+    return this.pivot;
+  }
+  hideSpinner() {
+    this.spinner.hide();
   }
 }

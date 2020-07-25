@@ -8,43 +8,50 @@
                 <mat-horizontal-stepper [linear]="isLinear" #stepper>
                     <mat-step [stepControl]="firstFormGroup">
                       <form [formGroup]="firstFormGroup">
-                        <ng-template matStepLabel>Preview</ng-template>
+                        <ng-template matStepLabel>Giỏ hàng</ng-template>
                         <app-cart-item></app-cart-item>
                         <div class="row ml-auto mr-auto mb-auto mt-2">
-                            <div class="col-lg-9"></div>
+                            <div class="col-lg-9">
+                                <div class="row coupon ml-auto mr-auto mb-auto mt-1">
+                                    <input type="text"
+                                           class="form-control col-lg-4"
+                                           placeholder="Coupon" />
+                                    <button class="btn btn-outline-primary col-lg-2">Áp dụng</button>
+                                </div>
+                            </div>
                             <div class="col-lg-3 ml-2 row justify-content-center">
-                            <button mat-button matStepperNext mat-raised-button color="warn">Checkout</button>
+                            <button class="col-12" mat-button matStepperNext mat-raised-button color="warn">Tiến hành thanh toán</button>
                             </div>
                         </div>
                       </form>
                     </mat-step>
                     <mat-step [stepControl]="secondFormGroup">
                       <form [formGroup]="secondFormGroup">
-                        <ng-template matStepLabel>Chekout</ng-template>
+                        <ng-template matStepLabel>Tiến hành thanh toán</ng-template>
                         <div class="row">
                             <div class="col-lg-8">
                                 <div class="cart-form">
                                     <form class="p-2 text-black">
-                                        <h2 class="text-left">Your Information</h2>
+                                        <h2 class="text-left">Thông tin của bạn</h2>
                                         <br />
                                         <div class="form-group">
-                                            <label for="name">Full Name</label>
+                                            <label for="name">Họ tên đầy đủ</label>
                                             <input type="text" class="form-control" name="name" placeholder="John Joe" required="required">
                                         </div>
                                         <div class="form-group">
-                                            <label for="direct">Address</label>
+                                            <label for="direct">Địa chỉ</label>
                                             <input type="text" class="form-control" name="direct" placeholder="New york City" required="required">
                                         </div>
                                         <div class="form-group">
                                             <div class="row justify-content-between" style="display:flex">
                                                 <div class="form-group col-lg-6">
-                                                    <label for="phone">Phone</label>
+                                                    <label for="phone">Số điện thoại</label>
                                                     <input type="tel" class="form-control" name="phone" placeholder="033344455" required="required">
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label for="note">Note</label>
+                                            <label for="note">Ghi chú</label>
                                             <input type="text" class="form-control" name="note" required="required">
                                         </div>
                                     </form>
@@ -53,17 +60,17 @@
                             <div class="col-lg-4" style="border: 1px solid; border-radius: 7px;">
                                 <div class="cart-form">
                                     <div class="p-2 text-black" >
-                                        <h2 class="text-left">Your Order</h2>
+                                        <h2 class="text-left">Đơn hàng của bạn</h2>
                                         <br />
                                         <div class="form-group" >
-                                            <label for="name">Product</label>
+                                            <label for="name">Sản phẩm</label>
                                             <div *ngFor="let item of cart.item">
                                                 <h4>{{item.ProductName}} x {{item.Quants}}</h4>
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label for="direct">Total</label>
-                                            <h4 class="text-black">500</h4>
+                                            <label for="direct">Tổng cộng</label>
+                                            <h4 class="text-black">{{totalMoney()}}</h4>
                                         </div>
                                     </div>
                                 </div>
@@ -71,8 +78,8 @@
                             </div>
                         </div>
                         <div>
-                          <button mat-button matStepperPrevious>Back</button>
-                          <button mat-button matStepperNext>Next</button>
+                          <button mat-button matStepperPrevious>Trở về</button>
+                          <button mat-button matStepperNext>Tiếp tục</button>
                         </div>
                       </form>
                     </mat-step>
