@@ -33,6 +33,7 @@ export class ProductComponent implements OnInit {
   isDesc: boolean = false;
   sortBy: string = 'ProductName';
   resultSearch: boolean;
+  isLoading = false;
   formatLabel(value: number) {
     if (value >= 1) {
       return Math.round(value / 1) + 'k';
@@ -94,6 +95,13 @@ export class ProductComponent implements OnInit {
     }
   }
   getType(typeId: string) {
+    if (this.isLoading) {
+      return;
+    }
+    else{
+      this.isLoading = true;
+    }
+    this.From = 0;
     this.pivot.Id = typeId;
     this.pivot.From = 0;
     this.pivot.Quants = this.Quants;

@@ -44,6 +44,10 @@ import {TableModule} from 'primeng/table';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { CardProductRelateComponent } from './card-product-relate/card-product-relate.component';
 import {MatMenuModule} from '@angular/material/menu';
+import { ScrollToTopComponent } from './scroll-to-top/scroll-to-top.component';
+import { BlogComponent } from './blog/blog.component';
+import {BlockUIModule} from 'primeng/blockui';
+import { WriteBlogComponent } from './write-blog/write-blog.component';
 // import { CheckoutComponent } from './checkout/checkout.component';
 @NgModule({
     imports: [
@@ -74,6 +78,7 @@ import {MatMenuModule} from '@angular/material/menu';
         TableModule,
         NgxSpinnerModule,
         MatMenuModule,
+        BlockUIModule,
     ],
     declarations: [
         ComponentsComponent,
@@ -94,6 +99,9 @@ import {MatMenuModule} from '@angular/material/menu';
         SignupComponent,
         UserprofileComponent,
         CardProductRelateComponent,
+        ScrollToTopComponent,
+        BlogComponent,
+        WriteBlogComponent,
         // CheckoutComponent,
     ],
     entryComponents: [NgbdModalContent],

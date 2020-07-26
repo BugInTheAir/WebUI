@@ -15,6 +15,11 @@
                             <h2>Danh mục</h2>
                             <div class="panel-group category-products" id="accordian">
                                 <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">
+                                            <p class="category-item" (click)="getType(null)" data-toggle="collapse" data-parent="#accordian">Tất cả sản phẩm</p>
+                                        </h4>
+                                    </div>
                                     <div class="panel-heading" *ngFor="let item of categorys">
                                         <h4 class="panel-title">
                                             <p class="category-item" (click)="getType(item.TypeId)" data-toggle="collapse" data-parent="#accordian">{{item.TypeName}}</p>
@@ -49,7 +54,7 @@
                                         </svg>
                                     </button>
                                 </div>
-                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 col-4 text-right">
+                                <div class="col-lg-2 col-md-2 col-sm-4 col-xs-4 col-4 text-right">
                                     <button class="btn btn-primary" mat-button [matMenuTriggerFor]="menu">Sắp xếp</button>
                                     <mat-menu #menu="matMenu">
                                         <button mat-menu-item (click)="sort('ProductName')">Theo tên</button>
@@ -57,7 +62,7 @@
                                     </mat-menu>
                                 </div>
                             </div>
-                            <div *ngIf="(resultSearch == false) && products.length == 0">
+                            <div class="m-2" *ngIf="(resultSearch == false) && products.length == 0">
                                 <h4>Không tìm thấy sản phẩm nào</h4>
                             </div>
                             <div class="row mt-2">
@@ -105,4 +110,5 @@
                     </div>
                 </div>
             </div>
+            <app-scroll-to-top></app-scroll-to-top>
         </section>

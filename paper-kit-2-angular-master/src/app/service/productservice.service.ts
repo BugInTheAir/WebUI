@@ -63,6 +63,7 @@ export class ProductserviceService {
       callback.hideSpinner();
       callback.loading = false;
       callback.loadingMore = false;
+      callback.isLoading = false;
       });
     });
   }

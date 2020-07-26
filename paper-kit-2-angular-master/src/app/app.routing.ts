@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule, } from '@angular/common';
 import { BrowserModule  } from '@angular/platform-browser';
 import { Routes, RouterModule } from '@angular/router';
-
 import { ComponentsComponent } from './components/components.component';
 import { UserprofileComponent } from './components/userprofile/userprofile.component';
 import {SigninComponent} from './components/signin/signin.component';
@@ -12,10 +11,12 @@ import { ProductComponent } from './components/product/product.component';
 import { ContactComponent } from './components/contact/contact.component';
 import { ProductdetailComponent } from './components/productdetail/productdetail.component';
 import { CartComponent } from './components/cart/cart.component';
+import { BlogComponent } from './components/blog/blog.component'
 const routes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
     { path: 'home',             component: ComponentsComponent },
     { path: 'user-profile',     component: UserprofileComponent },
+    { path: 'blog',             component: BlogComponent },
     { path: 'signin',           component: SigninComponent},
     { path: 'signup',           component: SignupComponent},
     { path: 'nucleoicons',      component: NucleoiconsComponent },
