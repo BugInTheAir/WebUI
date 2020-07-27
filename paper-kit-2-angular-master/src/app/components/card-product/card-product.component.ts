@@ -21,7 +21,7 @@ export class CardProductComponent implements OnInit {
   Id = null;
   previousType = null;
   responsiveOptions;
-  constructor(public router: Router, public prSvc: ProductserviceService, private spinner: NgxSpinnerService) {
+  constructor(public router: Router, public cartSvc: CartServiceService ,public prSvc: ProductserviceService,private delegate: DelegateServiceService ,private spinner: NgxSpinnerService, private snackBar: MatSnackBar) {
     this.responsiveOptions = [
       {
           breakpoint: '1024px',
@@ -52,5 +52,17 @@ export class CardProductComponent implements OnInit {
   }
   hideSpinner() {
     this.spinner.hide();
+  }
+  Add(product: Product) {
+    this.cartSvc.addItem(product, 1);
+    this.onQuantityChange();
+  }
+  onQuantityChange() {
+    this.delegate.navbarFunction().updateCartCountUI();
+  }
+  openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 2000,
+    });
   }
 }

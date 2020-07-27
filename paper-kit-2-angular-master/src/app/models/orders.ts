@@ -1,9 +1,13 @@
 export class Orders {
-    item: OrderDetail[] = new Array<OrderDetail>();
-    paypalId: string;
+    Detail: OrderDetail[] = new Array<OrderDetail>();
+    PaypalId: string;
+    GrandTotal: number;
+    OrderDate: string;
+    Status: string;
+    OrderId: string;
 }
 export class OrderDetail {
     ProductCode: string;
-    Price: number;
+    SellPrice: number;
     Quants: number;
 }

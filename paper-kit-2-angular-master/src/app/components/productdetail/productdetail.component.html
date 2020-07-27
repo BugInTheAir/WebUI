@@ -11,8 +11,8 @@
                             <ng-template pTemplate="item" let-item>
                                 <img width="400" height="300" [src]="item.ImgName" />
                             </ng-template>
-                            <ng-template pTemplate="thumbnail" let-item>
-                                <div class="p-grid p-nogutter p-justify-center">
+                            <ng-template class="d-flex justify-content-center" pTemplate="thumbnail" let-item>
+                                <div class="p-grid p-nogutter p-justify-center text-center">
                                     <img width="50" height="50"  [src]="item.ImgName" />
                                 </div>
                             </ng-template>

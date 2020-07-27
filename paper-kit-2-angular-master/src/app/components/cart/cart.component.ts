@@ -93,8 +93,8 @@ getOrder(cart: Cart){
     let order = new Array<OrderDetail>();
     cart.item.forEach((item) => {
         let temp = new OrderDetail();
-        temp.ProductCode= item.ProductCode;
-        temp.Price = item.Price;
+        temp.ProductCode = item.ProductCode;
+        temp.SellPrice = item.Price;
         temp.Quants = item.Quants;
         order.push(temp);
     })
@@ -121,9 +121,10 @@ private initConfig(): void {
             actions.order.get().then(details => {
                 console.log('onApprove - you can get full order details inside onApprove: ', details);
                 console.log('PayerID', details.payer.payer_id);
-                this.orders.paypalId = details.payer.payer_id;
-                this.orders.item = this.getOrder(this.cart)
+                this.orders.PaypalId = details.payer.payer_id;
+                this.orders.Detail = this.getOrder(this.cart)
                 console.log(this.orders);
+                this.cartSvc.createOrder(this.orders);
             });
 
         },
@@ -138,9 +139,8 @@ private initConfig(): void {
             console.log('OnError', err);
         },
         onClick: (data, actions) => {
-
             console.log('onClick', data, actions);
-            console.log("paypal", this.getListPurchase(this.cart));
+            console.log('paypal', this.getListPurchase(this.cart));
         },
     };
 }

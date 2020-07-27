@@ -4,6 +4,7 @@ import { Cart, ProductCart } from 'app/models/cart';
 import { Product } from 'app/models/product';
 import { Observer, Observable } from 'rxjs';
 import { LocalstorageServiceService } from './localstorage-service.service';
+import { Orders } from 'app/models/orders';
 const CART_KEY = "cart";
 @Injectable({
   providedIn: 'root'
@@ -14,10 +15,10 @@ export class CartServiceService {
   cart: Cart;
   private subscriptionObservable: Observable<Cart>;
   private subscribers: Array<Observer<Cart>> = new Array<Observer<Cart>>();
-  constructor(private http: HttpClient, private localStorage: LocalstorageServiceService) { 
+  constructor(private http: HttpClient, private localStorage: LocalstorageServiceService) {
     this.storage = this.localStorage.get();
   }
-  public addItem(product: Product, quantity: number): void {
+  addItem(product: Product, quantity: number): void {
     const cart = this.retrieve();
     let item = cart.item.find((p) => p.ProductCode === product.ProductCode);
     if (item === undefined) {
@@ -33,7 +34,7 @@ export class CartServiceService {
     this.save(cart);
     this.dispatch(cart);
   }
-  public retrieve(): Cart {
+  retrieve(): Cart {
     const cart = new Cart();
     const storedCart = this.storage.getItem(CART_KEY);
     if (storedCart) {
@@ -41,10 +42,10 @@ export class CartServiceService {
     }
     return cart;
   }
-  public save(cart: Cart): void {
+  save(cart: Cart): void {
     this.storage.setItem(CART_KEY, JSON.stringify(cart));
   }
-  private dispatch(cart: Cart): void {
+  dispatch(cart: Cart): void {
     this.subscribers
         .forEach((sub) => {
           try {
@@ -53,15 +54,20 @@ export class CartServiceService {
           }
         });
   }
-  public get(callback) {
+  get(callback) {
     callback.cart = this.retrieve();
   }
-  public totalMoney() {
+  totalMoney() {
     let sum = 0;
     const cart = this.retrieve();
     cart.item.forEach((item) => {
       sum += item.Quants * item.Price;
     })
     return sum;
+  }
+  createOrder(orders: Orders) {
+    this.http.post('http://52.163.93.79/user_svc/api/order', orders).subscribe((response) => {
+      console.log(response);
+    })
   }
 }

@@ -8,7 +8,7 @@
                     <img src="https://www.petcity.vn/media/news/920_cat5_500x462.jpg" alt="Circle Image" class="img-circle img-no-padding img-responsive">
                 </div>
                 <div class="name">
-                    <h4 class="title">Mèo<br /></h4>
+                    <h4 class="title">{{user.UserName}}<br /></h4>
                     <h6 class="description">Người dùng</h6>
                 </div>
             </div>
@@ -28,7 +28,7 @@
                         <ngb-tab title="Lịch sử mua hàng">
                             <ng-template ngbTabContent>
                                 <div class="box-content">
-                                    <table class="table table-striped table-bordered">
+                                    <table class="table table-striped">
                                         <thead>
                                             <tr>
                                                 <th>Mã Đơn hàng</th>
@@ -37,21 +37,29 @@
                                                 <th>Trạng thái</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
+                                        <tbody *ngFor="let item of orders">
                                                 <tr>
-                                                    <td class="center">
+                                                    <td class="center" style="padding-top: 20px;">
                                                         <div class="eclipse-text">
-                                                            <a>@i.OrderID</a>
+                                                            <a>{{item.OrderId}}</a>
                                                         </div>
                                                     </td>
-                                                    <td class="center">@i.OrderDate</td>
-                                                    <td class="center">@i.TotalPrice</td>
-                                                    <td class="center">@i.OrderStatus</td>
+                                                    <td class="center" style="padding-top: 20px;">
+                                                        <a>{{item.OrderDate}}</a>
+                                                    </td>
+                                                    <td class="center" style="padding-top: 20px;"><a>{{item.GrandTotal}}</a></td>
+                                                    <td class="center">
+                                                        <div *ngIf="item.Status =='P'">
+                                                            <a class="btn btn-primary text-white">Đã thanh toán</a>
+                                                        </div>
+                                                    </td>
                                                 </tr>
                                         </tbody>
                                     </table>
                                 </div>
-                                <h3 class="text-muted">Bạn không có đơn hàng nào :(</h3>
+                                <div *ngIf="orders.length == 0">
+                                    <h3 class="text-muted">Bạn không có đơn hàng nào :(</h3>
+                                </div>
                                 <br>
                                 <button [routerLink]="['/product']" class="btn btn-warning btn-round">Đặt hàng ngay!</button>
                             </ng-template>

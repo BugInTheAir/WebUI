@@ -14,7 +14,9 @@ export class UserServiceService {
   StatusDecription: string;
   constructor(private http: HttpClient, private auth: AuthService) { }
   Register(user: User, callback) {
-    this.http.post('http://cpharma.southeastasia.cloudapp.azure.com/crm/api/user', user).subscribe((response) => {
+    this.http.post('http://52.163.93.79/user_svc/api/user', user).subscribe((response) => {
+      console.log(response);
+      console.log(user);
       let status = response as IStatus;
       if (status.StatusCode === 201) {
         callback.RegisterSucess(status.StatusDescription);
@@ -27,8 +29,7 @@ export class UserServiceService {
   }
   Authentication(userName, password, callback) {
     const body = 'username=' + userName + '&password=' + password + '&grant_type=password';
-    const reqHeader = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
-    this.http.post('http://cpharma.southeastasia.cloudapp.azure.com/crm/api/token', body, {headers: reqHeader}).subscribe((response) => {
+    this.http.post('http://52.163.93.79/user_svc/api/token', body).subscribe((response) => {
       const token = response as UserToken;
       console.log(response);
       this.auth.setToken(token.access_token);
@@ -39,7 +40,15 @@ export class UserServiceService {
       callback.Log(true);
     })
   }
-  getUser(user){
-    this.http.get('http://cpharma.southeastasia.cloudapp.azure.com/crm/api/')
+  getUser(callback) {
+    this.http.get('http://52.163.93.79/user_svc/api/user/profile').subscribe((response) => {
+      callback.user = response;
+    })
+  }
+  checkingOrders(callback) {
+    this.http.get('http://52.163.93.79/user_svc/api/user/orders').subscribe((response) => {
+      console.log(response);
+      callback.orders = response;
+    })
   }
 }

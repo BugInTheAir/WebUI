@@ -11,12 +11,14 @@ import { ProductComponent } from './components/product/product.component';
 import { ContactComponent } from './components/contact/contact.component';
 import { ProductdetailComponent } from './components/productdetail/productdetail.component';
 import { CartComponent } from './components/cart/cart.component';
-import { BlogComponent } from './components/blog/blog.component'
+import { BlogComponent } from './components/blog/blog.component';
+import { WriteBlogComponent } from './components/write-blog/write-blog.component';
 const routes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
     { path: 'home',             component: ComponentsComponent },
     { path: 'user-profile',     component: UserprofileComponent },
     { path: 'blog',             component: BlogComponent },
+    { path: 'write-blog',       component: WriteBlogComponent },
     { path: 'signin',           component: SigninComponent},
     { path: 'signup',           component: SignupComponent},
     { path: 'nucleoicons',      component: NucleoiconsComponent },

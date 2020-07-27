@@ -21,7 +21,6 @@ import {CarouselModule} from 'primeng/carousel';
 import {ButtonModule} from 'primeng/button';
 import {GalleriaModule} from 'primeng/galleria';
 import { FacebookModule } from 'ngx-facebook';
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -45,7 +44,7 @@ import { FacebookModule } from 'ngx-facebook';
     ButtonModule,
     GalleriaModule,
     FacebookModule,
-    FacebookModule.forRoot()
+    FacebookModule.forRoot(),
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

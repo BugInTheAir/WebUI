@@ -48,7 +48,7 @@ import { ScrollToTopComponent } from './scroll-to-top/scroll-to-top.component';
 import { BlogComponent } from './blog/blog.component';
 import {BlockUIModule} from 'primeng/blockui';
 import { WriteBlogComponent } from './write-blog/write-blog.component';
-// import { CheckoutComponent } from './checkout/checkout.component';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 @NgModule({
     imports: [
         CommonModule,
@@ -79,6 +79,7 @@ import { WriteBlogComponent } from './write-blog/write-blog.component';
         NgxSpinnerModule,
         MatMenuModule,
         BlockUIModule,
+        CKEditorModule,
     ],
     declarations: [
         ComponentsComponent,
@@ -102,7 +103,6 @@ import { WriteBlogComponent } from './write-blog/write-blog.component';
         ScrollToTopComponent,
         BlogComponent,
         WriteBlogComponent,
-        // CheckoutComponent,
     ],
     entryComponents: [NgbdModalContent],
     exports: [ ComponentsComponent ]

@@ -28,7 +28,8 @@ export class SignupComponent implements OnInit {
   Regis() {
     this.spinner.show();
     this.userSvc.Register(this.user, this);
-    console.log(status)
+    console.log(status);
+    console.log(this.user);
   }
   RegisterSucess(status) {
     console.log(status);
