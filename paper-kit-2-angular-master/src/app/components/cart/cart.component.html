@@ -10,17 +10,18 @@
                       <form [formGroup]="firstFormGroup">
                         <ng-template matStepLabel>Giỏ hàng</ng-template>
                         <app-cart-item></app-cart-item>
-                        <div class="row ml-auto mr-auto mb-auto mt-2">
+                        <div class="row mb-auto mt-2">
                             <div class="col-lg-9">
                                 <div class="row coupon ml-auto mr-auto mb-auto mt-1">
                                     <input type="text"
-                                           class="form-control col-lg-4"
+                                           class="form-control col-lg-4 mb-1"
                                            placeholder="Coupon" />
-                                    <button class="btn btn-outline-primary col-lg-2">Áp dụng</button>
+                                    <button class="btn btn-outline-primary col-lg-2 mb-1">Áp dụng</button>
+                                    <button (click)="cartSvc.removeCart()" class="btn btn-secondary ml-auto col-lg-2 mb-1">Xoá giỏ hàng</button>
                                 </div>
                             </div>
-                            <div class="col-lg-3 ml-2 row justify-content-center">
-                            <button class="col-12" mat-button matStepperNext mat-raised-button color="warn">Tiến hành thanh toán</button>
+                            <div class="col-lg-3 d-flex justify-content-center">
+                                <button class="col-12" mat-button matStepperNext mat-raised-button color="warn">Tiến hành thanh toán</button>
                             </div>
                         </div>
                       </form>
@@ -28,33 +29,29 @@
                     <mat-step [stepControl]="secondFormGroup">
                       <form [formGroup]="secondFormGroup">
                         <ng-template matStepLabel>Tiến hành thanh toán</ng-template>
-                        <div class="row">
+                        <div *ngIf="authSvc.getToken() != null" class="row">
                             <div class="col-lg-8">
                                 <div class="cart-form">
-                                    <form class="p-2 text-black">
+                                    <div class="p-2 text-black">
                                         <h2 class="text-left">Thông tin của bạn</h2>
                                         <br />
-                                        <div class="form-group">
-                                            <label for="name">Họ tên đầy đủ</label>
-                                            <input type="text" class="form-control" name="name" placeholder="John Joe" required="required">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="direct">Địa chỉ</label>
-                                            <input type="text" class="form-control" name="direct" placeholder="New york City" required="required">
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="row justify-content-between" style="display:flex">
-                                                <div class="form-group col-lg-6">
-                                                    <label for="phone">Số điện thoại</label>
-                                                    <input type="tel" class="form-control" name="phone" placeholder="033344455" required="required">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="note">Ghi chú</label>
-                                            <input type="text" class="form-control" name="note" required="required">
-                                        </div>
-                                    </form>
+                                        <table class="table table-borderless">
+                                            <tbody>
+                                                <tr>
+                                                    <td><p style="font-weight:bold">Họ và tên:</p></td>
+                                                    <td><p>{{user.FullName}}</p></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><p style="font-weight:bold">SĐT:</p></td>
+                                                    <td><p>{{user.PhoneNumber}}</p></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><p style="font-weight:bold">Địa chỉ:</p></td>
+                                                    <td><p>{{user.Address}}</p></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-lg-4" style="border: 1px solid; border-radius: 7px;">
@@ -63,7 +60,7 @@
                                         <h2 class="text-left">Đơn hàng của bạn</h2>
                                         <br />
                                         <div class="form-group" >
-                                            <label for="name">Sản phẩm</label>
+                                            <h4 for="name">Sản phẩm</h4>
                                             <div *ngFor="let item of cart.item">
                                                 <h4>{{item.ProductName}} x {{item.Quants}}</h4>
                                             </div>
@@ -77,28 +74,30 @@
                                 <ngx-paypal [config]="payPalConfig"></ngx-paypal>
                             </div>
                         </div>
+                        <div *ngIf="authSvc.getToken() == null" class="m-4 d-flex justify-content-center align-items-center">
+                            <div>
+                                <h4>Vui lòng đăng nhập để thanh toán</h4>
+                                <div class="d-flex justify-content-center align-items-center">
+                                    <a [routerLink]="['/signin']" class="btn btn-primary">Đăng nhập</a>
+                                </div>
+                            </div>
+                        </div>
                         <div>
                           <button mat-button matStepperPrevious>Trở về</button>
                           <button mat-button matStepperNext>Tiếp tục</button>
                         </div>
                       </form>
                     </mat-step>
-                    <mat-step>
-                      <ng-template matStepLabel>Done</ng-template>
-                      <p>You are now done.</p>
-                      <div>
-                        <button mat-button matStepperPrevious>Back</button>
-                        <button mat-button (click)="stepper.reset()">Reset</button>
-                      </div>
-                    </mat-step>
                   </mat-horizontal-stepper>
             </div>
             <div *ngIf="!cart?.item?.length">
                 <div class="container">
-                    <div class="alert alert-danger">
-                        <h4>Bag empty!</h4>
-                        <a class="h5" routerLink="/home">Return home</a>
-                    </div>
+                    <div class="row justify-content-center">
+                        <div class="empty-form col-lg-6 text-center m-4 p-2">
+                            <h3 class="mt-3">Oop! Giỏ hàng trống</h3>
+                            <img class="ml-4 img-fluid" src="https://i1.wp.com/www.huratips.com/wp-content/uploads/2019/04/empty-cart.png?resize=603%2C288&ssl=1" />
+                            <a routerLink="/home" class="h4">Trở lại cửa hàng</a>
+                        </div>
                 </div>
             </div>
         </div>

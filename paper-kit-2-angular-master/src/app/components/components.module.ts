@@ -49,6 +49,12 @@ import { BlogComponent } from './blog/blog.component';
 import {BlockUIModule} from 'primeng/blockui';
 import { WriteBlogComponent } from './write-blog/write-blog.component';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import { SuccessComponent } from './success/success.component';
+import { OrderDetailComponent } from './order-detail/order-detail.component';
+import { SearchComponent } from './search/search.component';
+import {DropdownModule} from 'primeng/dropdown';
+import {PanelModule} from 'primeng/panel';
+import {DialogModule} from 'primeng/dialog';
 @NgModule({
     imports: [
         CommonModule,
@@ -80,6 +86,9 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
         MatMenuModule,
         BlockUIModule,
         CKEditorModule,
+        DropdownModule,
+        PanelModule,
+        DialogModule,
     ],
     declarations: [
         ComponentsComponent,
@@ -103,6 +112,9 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
         ScrollToTopComponent,
         BlogComponent,
         WriteBlogComponent,
+        SuccessComponent,
+        OrderDetailComponent,
+        SearchComponent,
     ],
     entryComponents: [NgbdModalContent],
     exports: [ ComponentsComponent ]

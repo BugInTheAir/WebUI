@@ -3,6 +3,9 @@ import { Location, LocationStrategy, PathLocationStrategy } from '@angular/commo
 import { CartServiceService } from 'app/service/cart-service.service';
 import { Cart } from 'app/models/cart';
 import { DelegateServiceService } from 'app/service/delegate-service.service';
+import { User } from 'app/models/user';
+import { UserServiceService } from 'app/service/user-service.service';
+import { AuthService } from 'app/service/auth.service';
 
 @Component({
     selector: 'app-navbar',
@@ -15,7 +18,8 @@ export class NavbarComponent implements OnInit {
     total: number;
     cart = new Cart();
     itemCount: number;
-    constructor(public location: Location, private element: ElementRef, public cartSvc: CartServiceService, private delegate: DelegateServiceService) {
+    user = new User();
+    constructor(public location: Location, private element: ElementRef, public cartSvc: CartServiceService, private delegate: DelegateServiceService, public userSvc: UserServiceService, public authSvc: AuthService) {
         this.sidebarVisible = false;
     }
 
@@ -28,6 +32,12 @@ export class NavbarComponent implements OnInit {
     updateCartCountUI() {
         this.cartSvc.get(this);
         this.itemCount = this.cart.item.map((x) => x.Quants).reduce((p , n) => p + n, 0);
+    }
+    getUser() {
+        if(this.authSvc.getToken() !== null){
+            this.userSvc.getUser(this);
+        }
+        return this.user.UserName;
     }
     sidebarOpen() {
         const toggleButton = this.toggleButton;

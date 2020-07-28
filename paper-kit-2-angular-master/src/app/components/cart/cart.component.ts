@@ -6,6 +6,9 @@ import { IPayPalConfig, ICreateOrderRequest } from 'ngx-paypal';
 import { ProductItem, Amount, BreakDown, PurchaseUnits } from 'app/models/purchase-units';
 import { Orders, OrderDetail } from 'app/models/orders';
 import { DelegateServiceService } from 'app/service/delegate-service.service';
+import { UserServiceService } from 'app/service/user-service.service';
+import { User } from 'app/models/user';
+import { AuthService } from 'app/service/auth.service';
 
 @Component({
   selector: 'app-cart',
@@ -20,11 +23,13 @@ export class CartComponent implements OnInit {
   secondFormGroup: FormGroup;
   cart = new Cart();
   orders = new Orders();
+  user = new User();
   public payPalConfig ?: IPayPalConfig;
-  constructor(public cartSvc: CartServiceService, private _formBuilder: FormBuilder, private delegate: DelegateServiceService) { }
+  constructor(public cartSvc: CartServiceService, private _formBuilder: FormBuilder, private delegate: DelegateServiceService, public userSvc: UserServiceService, public authSvc: AuthService) { }
   ngOnInit(): void {
     this.updateCart();
     this.delegate.changeCheckout(this);
+    this.userSvc.getUser(this);
     this.firstFormGroup = this._formBuilder.group({
       firstCtrl: ['', Validators.required]
     });
@@ -36,8 +41,12 @@ export class CartComponent implements OnInit {
   updateCart() {
     this.cartSvc.get(this);
   }
+  removeCart() {
+      this.cartSvc.removeCart();
+      window.location.reload();
+  }
   totalMoney() {
-      let total= 0;
+      let total = 0;
     this.cart.item.forEach((item) => {
       total += (item.Quants * item.Price);
     });
@@ -54,11 +63,8 @@ export class CartComponent implements OnInit {
         let unit_amount = new Amount();
         unit_amount.currency_code = 'USD';
         unit_amount.value = ((item.Price / this.usdValue).toFixed(2)).toString();
-        console.log('price VND item', item.Price);
-        console.log('price USD item', (((item.Price * item.Quants) / this.usdValue).toFixed(2)));
         temp.unit_amount = unit_amount;
-        this.sum += parseFloat(unit_amount.value)*item.Quants;
-        console.log("unit_amount: ",unit_amount.value);
+        this.sum += parseFloat(unit_amount.value) * item.Quants;
         result.push(temp);
     });
     this.sum = parseFloat(this.sum.toFixed(2));
@@ -98,7 +104,6 @@ getOrder(cart: Cart){
         temp.Quants = item.Quants;
         order.push(temp);
     })
-    console.log('itemOrder', order );
     return order;
 }
 private initConfig(): void {
@@ -119,12 +124,11 @@ private initConfig(): void {
         onApprove: (data, actions) => {
             console.log('onApprove - transaction was approved, but not authorized', data, actions);
             actions.order.get().then(details => {
-                console.log('onApprove - you can get full order details inside onApprove: ', details);
-                console.log('PayerID', details.payer.payer_id);
                 this.orders.PaypalId = details.payer.payer_id;
                 this.orders.Detail = this.getOrder(this.cart)
-                console.log(this.orders);
                 this.cartSvc.createOrder(this.orders);
+                this.cartSvc.removeCart();
+                window.location.replace('/success');
             });
 
         },

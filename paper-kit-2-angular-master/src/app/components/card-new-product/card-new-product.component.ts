@@ -4,6 +4,9 @@ import { ProductserviceService } from 'app/service/productservice.service';
 import { PivotMV } from 'app/models/pivot-mv';
 import { Product } from 'app/models/product';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { CartServiceService } from 'app/service/cart-service.service';
+import { DelegateServiceService } from 'app/service/delegate-service.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-card-new-product',
@@ -18,7 +21,7 @@ export class CardNewProductComponent implements OnInit {
   Id = null;
   previousType = null;
   responsiveOptions;
-  constructor(public router: Router, public prSvc: ProductserviceService, private spinner: NgxSpinnerService) {
+  constructor(public router: Router, public cartSvc: CartServiceService ,public prSvc: ProductserviceService,private delegate: DelegateServiceService,private snackBar: MatSnackBar ,private spinner: NgxSpinnerService) {
     this.responsiveOptions = [
       {
           breakpoint: '1024px',
@@ -50,5 +53,17 @@ export class CardNewProductComponent implements OnInit {
   }
   hideSpinner() {
     this.spinner.hide();
+  }
+  public Add(product: Product) {
+    this.cartSvc.addItem(product, 1 );
+    this.onQuantityChange();
+  }
+  onQuantityChange() {
+    this.delegate.navbarFunction().updateCartCountUI();
+  }
+  openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 2000,
+    });
   }
 }

@@ -17,20 +17,23 @@
                                   <i class="fa fa-twitter"></i>
                               </a>
                           </div>
-                            <label>UserName</label>
+                            <label>Tên đăng nhập</label>
                             <div class="input-group form-group-no-border" >
                                 <input type="text" class="form-control" placeholder="UserName" [(ngModel)]="UserName"  >
                             </div>
-                            <label>Password</label>
+                            <label>Mật khẩu</label>
                             <div class="input-group form-group-no-border" >
                                 <input type="password" class="form-control" placeholder="Password" [(ngModel)]="Password" >
                             </div>
-                            <button (click)="Login()" class="btn btn-danger btn-block btn-round">Login</button>
+                            <div class="mt-2 text-white" style="height: 30px;">
+                                <p>{{getCaption()}}</p>
+                            </div>
+                            <button type="submit" (click)="Login()" class="btn btn-danger btn-block btn-round">Đăng nhập</button>
                         <div class="forgot">
-                            <a href="#" class="btn btn-link btn-danger">Forgot password?</a>
+                            <a href="#" class="btn btn-link btn-danger">Quên mật khẩu?</a>
                         </div>
                         <div class="forgot">
-                            <a [routerLink]="['/signup']" class=""btn btn-link btn-warning>Sign Up!</a>
+                            <a [routerLink]="['/signup']" class=""btn btn-link btn-warning>Đăng kí!</a>
                         </div>
                       </div>
                     </div>

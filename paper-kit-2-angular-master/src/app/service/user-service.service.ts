@@ -9,15 +9,14 @@ import { AuthService } from './auth.service';
   providedIn: 'root'
 })
 export class UserServiceService {
+  user = new User();
   private path = 'user';
   private storage: Storage;
   StatusDecription: string;
   constructor(private http: HttpClient, private auth: AuthService) { }
   Register(user: User, callback) {
     this.http.post('http://52.163.93.79/user_svc/api/user', user).subscribe((response) => {
-      console.log(response);
-      console.log(user);
-      let status = response as IStatus;
+      const status = response as IStatus;
       if (status.StatusCode === 201) {
         callback.RegisterSucess(status.StatusDescription);
       }
@@ -31,24 +30,33 @@ export class UserServiceService {
     const body = 'username=' + userName + '&password=' + password + '&grant_type=password';
     this.http.post('http://52.163.93.79/user_svc/api/token', body).subscribe((response) => {
       const token = response as UserToken;
-      console.log(response);
       this.auth.setToken(token.access_token);
-      console.log(token.access_token);
-      if (token.access_token === null) {
-        callback.Log(false);
+      if (token.access_token.length == null) {
+        callback.SetState();
       }
-      callback.Log(true);
-    })
+      callback.Log();
+    });
   }
   getUser(callback) {
     this.http.get('http://52.163.93.79/user_svc/api/user/profile').subscribe((response) => {
       callback.user = response;
-    })
+    });
   }
-  checkingOrders(callback) {
+  getOrders(callback) {
     this.http.get('http://52.163.93.79/user_svc/api/user/orders').subscribe((response) => {
       console.log(response);
       callback.orders = response;
+    })
+  }
+  getOrderDetail(id, callback) {
+    this.http.get('http://52.163.93.79/user_svc/api/user/' + id + '/detail').subscribe((response) => {
+      console.log(response);
+    })
+  }
+  changeInfor(user: User, callback) {
+    this.http.put('http://52.163.93.79/user_svc/api/user', user).subscribe((response) => {
+      console.log(response);
+      callback.displayModal = false;
     })
   }
 }

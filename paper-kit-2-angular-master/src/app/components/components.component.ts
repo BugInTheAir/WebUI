@@ -62,6 +62,7 @@ import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 })
 
 export class ComponentsComponent implements OnInit {
+    search: string;
     All = null;
     CSSK = 'CSSK';
     TPCN = 'TPCN';

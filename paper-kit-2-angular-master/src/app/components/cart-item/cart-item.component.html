@@ -1,12 +1,12 @@
 <div class="row mt-1">
-    <div class="col-lg-9">
+    <div class="col-lg-9 mb-3">
         <div class="row justify-content-center align-items-center cart-form p-3 ml-auto mr-auto mb-auto mt-1" *ngFor="let item of cart.item">
-            <div class="col-lg-3 text-center">
+            <div class="col-lg-3 col-md-2 text-center">
                 <img style="max-width: 75px; max-height: 75px;" src="{{item.Image}}">
             </div>
-            <div class="col-lg-2 text-left" style="white-space:nowrap; overflow:hidden; text-overflow:ellipsis;"><h4 class="pt-3">{{item.ProductName}}</h4></div>
-            <div class="col-lg-1 text-center"><h4 class="pt-3">{{item.Price}}</h4></div>
-            <div class="col-lg-3">
+            <div class="col-lg-2 col-md-2 text-left" style="white-space:nowrap; overflow:hidden; text-overflow:ellipsis;"><h4 class="pt-3">{{item.ProductName}}</h4></div>
+            <div class="col-lg-1 col-md-1 text-center"><h4 class="pt-3">{{item.Price}}</h4></div>
+            <div class="col-lg-3 col-md-4">
                 <div class="input-group">
                     <div class="input-group-prepend">
                         <button (click)="subtract(item.ProductCode)" class="btn btn-outline-primary">&minus;</button>
@@ -17,11 +17,11 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-1 text-center"><h4 class="pt-3">{{item.Quants * item.Price}}</h4></div>
-            <div class="col-lg-1 justify-content-center" style="display: flex;"><button (click)="deleteone(item.ProductCode)" mat-button><i class="fa fa-trash" aria-hidden="true" style="color: red;"></i></button></div>
+            <div class="col-lg-1 col-md-1 text-center"><h4 class="pt-3">{{item.Quants * item.Price}}</h4></div>
+            <div class="col-lg-1 col-md-1 justify-content-center" style="display: flex;"><button (click)="deleteone(item.ProductCode)" mat-button><i class="fa fa-trash" aria-hidden="true" style="color: red;"></i></button></div>
         </div>
     </div>
-    <div class="col-lg-3">
+    <div class="col-lg-3 mb-2">
         <div class="row justify-content-center bill-form mt-1 m-auto">
             <div class="p-4 col-lg-10">
                 <div class="text-center">

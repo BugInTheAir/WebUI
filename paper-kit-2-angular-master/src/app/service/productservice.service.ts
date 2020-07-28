@@ -88,4 +88,15 @@ export class ProductserviceService {
       callback.product = response;
     });
   }
+  getSearchList(search: string, callback) {
+    console.log(search);
+    this.http.post('http://52.163.93.79/ware_svc/api/search', JSON.stringify(search)).subscribe((response) => {
+      callback.products = response;
+      if (callback.products === undefined) {
+        callback.searchResult = false;
+      }
+      callback.searchResult = true;
+      callback.spinner.hide();
+    });
+  }
 }

@@ -13,6 +13,9 @@ import { ProductdetailComponent } from './components/productdetail/productdetail
 import { CartComponent } from './components/cart/cart.component';
 import { BlogComponent } from './components/blog/blog.component';
 import { WriteBlogComponent } from './components/write-blog/write-blog.component';
+import { SuccessComponent } from './components/success/success.component';
+import { OrderDetailComponent } from './components/order-detail/order-detail.component';
+import { SearchComponent } from './components/search/search.component';
 const routes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
     { path: 'home',             component: ComponentsComponent },
@@ -26,6 +29,9 @@ const routes: Routes = [
     { path: 'productdetail/:id',    component: ProductdetailComponent },
     { path: 'contact',          component: ContactComponent},
     { path: 'cart',             component: CartComponent},
+    { path: 'success',          component: SuccessComponent},
+    { path: 'orderdetail/:id',  component: OrderDetailComponent},
+    { path: 'search/:search',   component: SearchComponent}
 ];
 
 @NgModule({

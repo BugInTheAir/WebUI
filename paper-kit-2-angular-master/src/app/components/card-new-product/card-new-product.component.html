@@ -15,7 +15,7 @@
                 </div>
                 <div class="row justify-content-center text-center">
                     <a [routerLink]="['/productdetail', item.ProductCode]" class="btn btn-outline-primary col-lg-5 col-md-5 col-sm-5 col-xs-5 col-5" >View</a>
-                    <button class="btn btn-danger col-lg-5 col-md-5 col-sm-5 col-xs-5 col-5">ADD</button>
+                    <button (click)="Add(item)" (click)="openSnackBar(1, item.ProductName)" class="btn btn-danger col-lg-5 col-md-5 col-sm-5 col-xs-5 col-5">ADD</button>
                 </div>
             </div>
         </div>

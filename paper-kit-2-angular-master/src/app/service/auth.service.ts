@@ -9,5 +9,9 @@ export class AuthService {
   public setToken(token: string) {
     sessionStorage.setItem('token', token);
   }
+  public removeToken() {
+    sessionStorage.clear();
+    window.location.replace('/home');
+  }
   constructor() { }
 }

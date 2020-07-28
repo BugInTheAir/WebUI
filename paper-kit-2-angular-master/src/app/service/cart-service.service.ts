@@ -70,4 +70,7 @@ export class CartServiceService {
       console.log(response);
     })
   }
+  removeCart() {
+    localStorage.clear();
+  }
 }

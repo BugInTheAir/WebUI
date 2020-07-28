@@ -23,10 +23,6 @@ export class ProductComponent implements OnInit {
   Quants = 8;
   Id = null;
   search: string;
-  sortKey: string;
-  sortField: string;
-  sortOrder: number;
-  sortOptions;
   loading = true;
   loadingMore: boolean;
   maxLoad = false;
@@ -42,15 +38,9 @@ export class ProductComponent implements OnInit {
   }
   constructor( public prSvc: ProductserviceService, private spinner: NgxSpinnerService, public cartSvc: CartServiceService ,private snackBar: MatSnackBar, private delegate: DelegateServiceService ) { }
   ngOnInit() {
-    console.log('pivot', this.getPivot());
     this.prSvc.getCategory(this);
     this.spinner.show();
     this.prSvc.getProductbyType(this.getPivot(), this);
-    this.sortOptions = [
-      {label: 'A-Z', value: '!year'},
-      {label: 'Price', value: 'year'},
-      {label: 'Brand', value: 'brand'}
-  ];
   }
   getPivot() {
     this.pivot.From = this.From;
@@ -82,18 +72,6 @@ export class ProductComponent implements OnInit {
   hideSpinner() {
     this.spinner.hide();
   }
-  onSortChange(event) {
-    let value = event.value;
-    if (value.indexOf('!') === 0) {
-        this.sortOrder = -1;
-        this.sortField = value.substring(1, value.length);
-    }
-    else
-    {
-        this.sortOrder = 1;
-        this.sortField = value;
-    }
-  }
   getType(typeId: string) {
     if (this.isLoading) {
       return;
@@ -105,7 +83,6 @@ export class ProductComponent implements OnInit {
     this.pivot.Id = typeId;
     this.pivot.From = 0;
     this.pivot.Quants = this.Quants;
-    console.log('pivotType', this.pivot);
     this.spinner.show();
     this.loading = true;
     this.prSvc.getProductbyType(this.pivot, this);
@@ -115,8 +92,6 @@ export class ProductComponent implements OnInit {
     this.spinner.show();
     this.pivot.From = this.From;
     this.pivot.Quants = this.pivot.Quants;
-    console.log(this.pivot.From);
-    console.log(this.pivot.Quants);
     this.prSvc.getProductbyType(this.pivot, this);
     if ((this.From + 8) % 8 !== 0) {
       this.loadingMore = false;

@@ -1,0 +1,18 @@
+.footer h4 h5 {
+    color: lightgrey
+}
+.rectangle {
+    border: 1px solid #949494;
+    box-sizing: border-box;
+}
+@media(min-width:892px) {
+    .border-fix {
+        border-left: 1px solid #949494;
+    }
+}
+
+@media(max-width:892px) {
+    .border-fix {
+        border-left: 0px solid #949494 !important;
+    }
+}

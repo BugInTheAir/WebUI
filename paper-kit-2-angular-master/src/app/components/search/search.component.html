@@ -1,0 +1,50 @@
+<div class="wrapper">
+    <div class="page-header page-header-xs section-dark"
+        style="background-image: url('https://forwardbaltimore.files.wordpress.com/2019/05/pill-background.jpg?w=1200')">
+        <div class="content-center">
+            <div class="container">
+                <div class="title-brand">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="section">
+    <div class="container">
+        <div class="title-section text-center col-12">
+            <h2 class="text-uppercase">Kết quản tìm kiếm</h2>
+            <hr>
+        </div>
+        <div class="" *ngFor="let item of products">
+            <div class="card">
+                <div class="row p-2">
+                    <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 col-6 d-flex justify-content-center align-items-center">
+                        <a class="text-center">
+                            <img class="" style="width:100%; max-width: 200px; min-height: 170px; max-height: 170px;" src="{{item.Imgs[0].ImgName}}" />
+                        </a>
+                    </div>
+                    <div class="p-2 d-flex justify-content-center align-items-center text-center col-lg-4 col-md-4 col-sm-4 col-xs-4 col-4">
+                        <div>
+                            <h3 class="text-black" style="font-family: sans-serif;">{{item.ProductName}}</h3>
+                            <h3 class="">{{item.Price | currency:'VND'}}</h3>
+                        </div>
+                    </div>
+                    <div class="justify-content-center d-flex align-items-center text-center col-lg-3 col-md-3 col-sm-3 col-xs-3 col-3">
+                        <div>
+                            <a [routerLink]="['/productdetail', item.ProductCode]"
+                                class="btn btn-outline-primary">Xem</a>
+                            <button (click)="Add(item)" (click)="openSnackBar(1, item.ProductName)" class="btn btn-danger">Thêm</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="m-2" *ngIf="searchResult === false">
+            <h4>Không tìm thấy sản phẩm nào</h4>
+        </div>
+        <div class="mt-4 d-flex justify-content-center" style="height: 30px; margin-top: 50px;">
+            <ngx-spinner bdColor="transparent" size="default" color="#000" type="square-jelly-box" [fullScreen]="false">
+            </ngx-spinner>
+        </div>
+    </div>
+</div>
